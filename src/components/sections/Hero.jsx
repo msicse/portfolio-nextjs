@@ -6,6 +6,7 @@ import { FiArrowDown, FiGithub, FiLinkedin, FiMail } from 'react-icons/fi';
 import { resumeData } from '../../data/resumeData';
 import ParticlesBackground from '../ParticlesBackground';
 import Image from 'next/image';
+import DownloadResumeButton from '../ui/DownloadResumeButton';
 
 export default function Hero() {
   const [isVisible, setIsVisible] = useState(false);
@@ -40,12 +41,11 @@ export default function Hero() {
             Full-Stack Web Developer 
             <span className="hidden sm:inline"> specializing in PHP, Laravel, MySQL, and JavaScript(React)</span>
           </motion.p>
-          
-          <motion.div 
+            <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={isVisible ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.5 }}
-            className="flex justify-center space-x-4 pt-6"
+            className="flex justify-center md:justify-start flex-wrap gap-4 pt-6"
           >            <a 
               href="/#contact"
               onClick={(e) => {
@@ -66,6 +66,7 @@ export default function Hero() {
             >
               View Projects
             </a>
+            <DownloadResumeButton variant="outline" className="px-6 py-3" />
           </motion.div>
           
           <motion.div 

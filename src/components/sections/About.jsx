@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from 'framer-motion';
-import { FiMapPin, FiMail, FiPhone } from 'react-icons/fi';
+import { FiMapPin, FiMail, FiPhone, FiDownload } from 'react-icons/fi';
 import { resumeData } from '../../data/resumeData';
 import SectionTitle from '../ui/SectionTitle';
 
@@ -94,8 +94,8 @@ export default function About({ id }) {
                 </div>
               </div>
             </div>
-            
-            <div className="mt-6">              <a 
+              <div className="mt-6 space-y-3">              
+              <a 
                 href="/#contact"
                 onClick={(e) => {
                   e.preventDefault();
@@ -104,6 +104,14 @@ export default function About({ id }) {
                 className="block w-full text-center py-2 px-4 bg-primary-light dark:bg-primary-dark text-white rounded-md hover:opacity-90 transition-opacity cursor-pointer"
               >
                 Send a Message
+              </a>
+              
+              <a 
+                href="/files/resume.pdf"
+                download="Md_Sumon_Islam_Resume.pdf"
+                className="flex items-center justify-center w-full text-center py-2 px-4 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-800 dark:text-gray-200 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+              >
+                <FiDownload className="mr-2" /> Download Resume
               </a>
             </div>
           </motion.div>

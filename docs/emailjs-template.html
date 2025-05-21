@@ -1,0 +1,36 @@
+<!-- 
+  This is a reference template for EmailJS.
+  
+  When setting up EmailJS:
+  1. Create an account at https://www.emailjs.com/
+  2. Create a new service connection (Gmail, Outlook, etc.)
+  3. Create an email template with the following variables
+  4. Configure your .env.local file with your credentials
+-->
+
+<!-- EmailJS Template Example -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Email Template</title>
+</head>
+<body>
+  <h2>New Contact Form Submission</h2>
+  <p><strong>Name:</strong> {{user_name}}</p>
+  <p><strong>Email:</strong> {{user_email}}</p>
+  <p><strong>Subject:</strong> {{subject}}</p>
+  <p><strong>Message:</strong></p>
+  <p style="white-space: pre-wrap;">{{message}}</p>
+  <hr>
+  <p><em>This message was sent from your portfolio website contact form.</em></p>
+</body>
+</html>
+
+<!-- 
+  After setting up:
+  1. In your EmailJS dashboard, note your Service ID, Template ID, and Public Key
+  2. Add these values to your .env.local file:
+     NEXT_PUBLIC_EMAILJS_SERVICE_ID=your_service_id
+     NEXT_PUBLIC_EMAILJS_TEMPLATE_ID=your_template_id
+     NEXT_PUBLIC_EMAILJS_PUBLIC_KEY=your_public_key
+-->

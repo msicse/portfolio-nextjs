@@ -12,7 +12,7 @@ export const resumeData = {
     }
   },
   
-  summary: "Full-Stack Web Developer with 6+ years of experience in PHP, Laravel, MySQL, and JavaScript, specializing in digitalizing workflows and optimizing IT infrastructure. Proven track record of building scalable web applications, administering servers, and collaborating with cross-functional teams to enhance efficiency. Passionate about solving technical challenges in production environments.",
+  summary: "Full-Stack Web Developer with 4+ years of experience in PHP, Laravel, MySQL, and JavaScript, specializing in digitalizing workflows and optimizing IT infrastructure. Proven track record of building scalable web applications, administering servers, and collaborating with cross-functional teams to enhance efficiency. Passionate about solving technical challenges in production environments.",
   
   skills: {
     languages: ["PHP", "JavaScript (React, jQuery)", "Python", "SQL", "HTML/CSS (Bootstrap, Tailwind)"],
@@ -52,15 +52,17 @@ export const resumeData = {
       title: "Inventory Management System",
       technologies: ["Laravel", "MySQL"],
       description: "Digitized procurement workflows, enabling real-time stock tracking for production teams.",
-      github: "https://github.com/msicse/inventory-management"
+      github: "https://github.com/msicse/inventory-management",
+      features: ["User-friendly interface", "role-based access control"],
+      tech: ["Laravel", "MySQL", "Bootstrap", "jQuery", "yajra datatables"]
     },
     {
       title: "News Aggregator",
       technologies: ["Laravel", "MySQL"],
       description: "Scaled to process articles from news APIs",
       features: ["Queue workers", "full-text search", "cron scheduling"],
-      tech: ["Laravel Horizon", "Guzzle", "Elasticsearch"],
-      github: "#"
+      tech: ["Laravel", "MySQL", "restful APIs", "cron jobs", "queue workers"],
+      github: "https://github.com/msicsenews-aggregator"
     },
     {
       title: "Task Management System",
@@ -74,8 +76,9 @@ export const resumeData = {
       title: "Project Management System",
       technologies: ["Laravel", "React", "Inertia.js", "MySQL"],
       description: "Improved team productivity with Gantt charts and Slack integration",
-      tech: ["Inertia.js", "Tailwind", "Laravel Sanctum"],
-      github: "https://github.com/msicse/project-management"
+      tech: ["Laravel", "Inertia.js", "MySQL", "Tailwind", "Laravel Sanctum"],
+      github: "https://github.com/msicse/project-management",
+      features: ["Manage project progress", "visualize workflows"]
     }
   ],
   

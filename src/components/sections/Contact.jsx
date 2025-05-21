@@ -1,20 +1,38 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { FiMail, FiMapPin, FiPhone, FiSend } from 'react-icons/fi';
+import { FiMail, FiMapPin, FiPhone, FiSend, FiCheck, FiAlertCircle } from 'react-icons/fi';
 import { resumeData } from '../../data/resumeData';
 import SectionTitle from '../ui/SectionTitle';
+import emailjs from '@emailjs/browser';
 
 export default function Contact({ id }) {
+  const form = useRef();
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
+    user_name: '',
+    user_email: '',
     subject: '',
     message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
+  const [errors, setErrors] = useState({});
+
+  const validateForm = () => {
+    const newErrors = {};
+    if (!formData.user_name.trim()) newErrors.user_name = "Name is required";
+    if (!formData.user_email.trim()) {
+      newErrors.user_email = "Email is required";
+    } else if (!/^\S+@\S+\.\S+$/.test(formData.user_email)) {
+      newErrors.user_email = "Email format is invalid";
+    }
+    if (!formData.subject.trim()) newErrors.subject = "Subject is required";
+    if (!formData.message.trim()) newErrors.message = "Message is required";
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,19 +40,52 @@ export default function Contact({ id }) {
       ...prev,
       [name]: value
     }));
+    
+    // Clear error for this field when user starts typing
+    if (errors[name]) {
+      setErrors(prev => ({
+        ...prev,
+        [name]: undefined
+      }));
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsSubmitting(true);
     
-    // Simulate form submission - replace with actual API call later
-    try {
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      setSubmitStatus({ success: true, message: 'Message sent successfully! I will get back to you soon.' });
-      setFormData({ name: '', email: '', subject: '', message: '' });
+    // Validate form before submission
+    if (!validateForm()) return;
+    
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+      try {
+      // Replace these with your actual EmailJS service IDs
+      // Sign up at https://www.emailjs.com/ to get these
+      await emailjs.sendForm(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || 'YOUR_SERVICE_ID',
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || 'YOUR_TEMPLATE_ID',
+        form.current,
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || 'YOUR_PUBLIC_KEY'
+      );
+      
+      setSubmitStatus({ 
+        success: true, 
+        message: 'Message sent successfully! I will get back to you soon.' 
+      });
+      
+      // Reset form data
+      setFormData({ 
+        user_name: '', 
+        user_email: '', 
+        subject: '', 
+        message: '' 
+      });
     } catch (error) {
-      setSubmitStatus({ success: false, message: 'Failed to send message. Please try again later.' });
+      console.error('Email sending failed:', error);
+      setSubmitStatus({ 
+        success: false, 
+        message: 'Failed to send message. Please try again later.' 
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -57,44 +108,47 @@ export default function Contact({ id }) {
             <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
               Send Me a Message
             </h3>
-            
-            <form onSubmit={handleSubmit} className="space-y-4">
+              <form ref={form} onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label 
-                  htmlFor="name" 
+                  htmlFor="user_name" 
                   className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
                 >
                   Your Name
                 </label>
                 <input
                   type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
+                  id="user_name"
+                  name="user_name"
+                  value={formData.user_name}
                   onChange={handleChange}
-                  required
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md focus:ring-2 focus:ring-primary-light dark:focus:ring-primary-dark focus:outline-none dark:bg-gray-800"
+                  className={`w-full px-4 py-2 border ${errors.user_name ? 'border-red-500 dark:border-red-500' : 'border-gray-300 dark:border-gray-700'} rounded-md focus:ring-2 focus:ring-primary-light dark:focus:ring-primary-dark focus:outline-none dark:bg-gray-800`}
                   placeholder="John Doe"
                 />
+                {errors.user_name && (
+                  <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.user_name}</p>
+                )}
               </div>
               
               <div>
                 <label 
-                  htmlFor="email" 
+                  htmlFor="user_email" 
                   className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
                 >
                   Email Address
                 </label>
                 <input
                   type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
+                  id="user_email"
+                  name="user_email"
+                  value={formData.user_email}
                   onChange={handleChange}
-                  required
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md focus:ring-2 focus:ring-primary-light dark:focus:ring-primary-dark focus:outline-none dark:bg-gray-800"
+                  className={`w-full px-4 py-2 border ${errors.user_email ? 'border-red-500 dark:border-red-500' : 'border-gray-300 dark:border-gray-700'} rounded-md focus:ring-2 focus:ring-primary-light dark:focus:ring-primary-dark focus:outline-none dark:bg-gray-800`}
                   placeholder="john@example.com"
                 />
+                {errors.user_email && (
+                  <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.user_email}</p>
+                )}
               </div>
               
               <div>
@@ -110,10 +164,12 @@ export default function Contact({ id }) {
                   name="subject"
                   value={formData.subject}
                   onChange={handleChange}
-                  required
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md focus:ring-2 focus:ring-primary-light dark:focus:ring-primary-dark focus:outline-none dark:bg-gray-800"
+                  className={`w-full px-4 py-2 border ${errors.subject ? 'border-red-500 dark:border-red-500' : 'border-gray-300 dark:border-gray-700'} rounded-md focus:ring-2 focus:ring-primary-light dark:focus:ring-primary-dark focus:outline-none dark:bg-gray-800`}
                   placeholder="Job opportunity"
                 />
+                {errors.subject && (
+                  <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.subject}</p>
+                )}
               </div>
               
               <div>
@@ -128,11 +184,13 @@ export default function Contact({ id }) {
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
-                  required
                   rows={5}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md focus:ring-2 focus:ring-primary-light dark:focus:ring-primary-dark focus:outline-none dark:bg-gray-800"
+                  className={`w-full px-4 py-2 border ${errors.message ? 'border-red-500 dark:border-red-500' : 'border-gray-300 dark:border-gray-700'} rounded-md focus:ring-2 focus:ring-primary-light dark:focus:ring-primary-dark focus:outline-none dark:bg-gray-800`}
                   placeholder="Your message here..."
                 />
+                {errors.message && (
+                  <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.message}</p>
+                )}
               </div>
               
               <button
@@ -155,13 +213,26 @@ export default function Contact({ id }) {
               
               {/* Form submission status */}
               {submitStatus && (
-                <div className={`mt-4 p-3 rounded-md ${
-                  submitStatus.success 
-                    ? 'bg-green-50 dark:bg-green-900/20 text-green-800 dark:text-green-200' 
-                    : 'bg-red-50 dark:bg-red-900/20 text-red-800 dark:text-red-200'
-                }`}>
-                  {submitStatus.message}
-                </div>
+                <motion.div 
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className={`mt-4 p-4 rounded-md flex items-start ${
+                    submitStatus.success 
+                      ? 'bg-green-50 dark:bg-green-900/20 text-green-800 dark:text-green-200 border-l-4 border-green-500' 
+                      : 'bg-red-50 dark:bg-red-900/20 text-red-800 dark:text-red-400 border-l-4 border-red-500'
+                  }`}
+                >
+                  <div className="mr-3 mt-0.5">
+                    {submitStatus.success ? (
+                      <FiCheck className="h-5 w-5 text-green-500" />
+                    ) : (
+                      <FiAlertCircle className="h-5 w-5 text-red-500" />
+                    )}
+                  </div>
+                  <div>
+                    {submitStatus.message}
+                  </div>
+                </motion.div>
               )}
             </form>
           </motion.div>
