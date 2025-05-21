@@ -1,0 +1,1 @@
+Add your professional profile photo here named 'profile.jpg' or 'profile.png'.
