@@ -5,9 +5,9 @@ import { ThemeProvider } from '../components/ThemeProvider';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
-  title: 'Md Sumon Islam - Full Stack Developer | PHP | Laravel | MySQL | JavaScript',
-  description: 'Full-Stack Web Developer with 6+ years of experience in PHP, Laravel, MySQL, and JavaScript, specializing in digitalizing workflows and optimizing IT infrastructure.',
-  keywords: 'PHP Developer, Laravel Developer, Full Stack Developer, Web Developer Bangladesh, DevOps Engineer',
+  title: 'Md Sumon Islam - Full-Stack Developer and DevOps Engineer',
+  description: 'Full-Stack Developer and DevOps Engineer skilled in Laravel, Django, FastAPI, React, Linux server administration, CI/CD, Docker, and SIEM-driven security operations.',
+  keywords: 'Full-Stack Developer, DevOps Engineer, Laravel, Django, FastAPI, React, Linux, CI/CD, SIEM, Bangladesh',
 };
 
 export default function RootLayout({ children }) {

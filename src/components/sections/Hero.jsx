@@ -13,15 +13,18 @@ export default function Hero() {
   
   useEffect(() => {
     setIsVisible(true);
-  }, []);  return (
-    <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden bg-gray-50 dark:bg-gray-900">
+  }, []);
+
+  return (
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-x-hidden bg-gray-50 dark:bg-gray-900">
       {/* Particles Background */}
       <ParticlesBackground />
       
       {/* Overlay gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white/10 dark:to-black/20 z-0"></div>
       
-      {/* Hero content */}      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10 text-center md:text-left md:flex md:items-center md:justify-between">
+      {/* Hero content */}
+      <div className="max-w-7xl mx-auto px-4 pt-24 pb-16 sm:px-6 sm:pt-28 lg:px-8 z-10 text-center md:text-left md:flex md:items-center md:justify-between md:py-0">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isVisible ? { opacity: 1, y: 0 } : {}}
@@ -38,21 +41,22 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="text-xl md:text-2xl max-w-2xl mx-auto text-gray-600 dark:text-gray-300"
           >
-            Full-Stack Web Developer 
-            <span className="hidden sm:inline"> specializing in PHP, Laravel, MySQL, and JavaScript(React)</span>
+            {resumeData.personalInfo.titleShort}
+            <span className="hidden sm:inline"> {resumeData.personalInfo.title}</span>
           </motion.p>
             <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={isVisible ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.5 }}
             className="flex justify-center md:justify-start flex-wrap gap-4 pt-6"
-          >            <a 
+          >
+            <a 
               href="/#contact"
               onClick={(e) => {
                 e.preventDefault();
                 document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="px-6 py-3 bg-primary-light dark:bg-primary-dark text-white rounded-md hover:opacity-90 transition-opacity cursor-pointer"
+              className="w-full sm:w-auto px-6 py-3 bg-primary-light dark:bg-primary-dark text-white rounded-md hover:opacity-90 transition-opacity cursor-pointer"
             >
               Contact Me
             </a>
@@ -62,18 +66,18 @@ export default function Hero() {
                 e.preventDefault();
                 document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="px-6 py-3 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white rounded-md hover:opacity-90 transition-opacity cursor-pointer"
+              className="w-full sm:w-auto px-6 py-3 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white rounded-md hover:opacity-90 transition-opacity cursor-pointer"
             >
               View Projects
             </a>
-            <DownloadResumeButton variant="outline" className="px-6 py-3" />
+            <DownloadResumeButton variant="outline" className="w-full sm:w-auto px-6 py-3" />
           </motion.div>
           
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={isVisible ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.7 }}
-            className="flex justify-center pt-6 space-x-6"
+            className="flex justify-center md:justify-start pt-6 space-x-6"
           >
             <a 
               href={`mailto:${resumeData.personalInfo.email}`}
@@ -98,7 +102,8 @@ export default function Hero() {
               target="_blank" rel="noopener noreferrer"
             >
               <FiLinkedin size={24} />
-            </a>          </motion.div>
+            </a>
+          </motion.div>
         </motion.div>
         
         {/* Profile Image */}
@@ -129,7 +134,8 @@ export default function Hero() {
         </motion.div>
       </div>
       
-      {/* Scroll down indicator */}<motion.a 
+      {/* Scroll down indicator */}
+      <motion.a 
         href="#about"
         onClick={(e) => {
           e.preventDefault();
@@ -144,7 +150,7 @@ export default function Hero() {
           repeatType: "reverse",
           repeatDelay: 0.5
         }}
-        className="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-gray-500 dark:text-gray-400 cursor-pointer hover:text-primary-light dark:hover:text-primary-dark"
+        className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 cursor-pointer text-gray-500 hover:text-primary-light dark:text-gray-400 dark:hover:text-primary-dark md:block"
       >
         <FiArrowDown size={24} />
       </motion.a>

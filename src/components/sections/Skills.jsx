@@ -19,8 +19,8 @@ export default function Skills({ id }) {
   // Category display names
   const categoryNames = {
     languages: "Programming Languages",
-    frameworks: "Frameworks & CMS",
-    databases: "Database",
+    frameworks: "Frameworks & Libraries",
+    databases: "Databases",
     systemAdmin: "System Administration",
     tools: "Tools & APIs",
     soft: "Soft Skills"
@@ -82,17 +82,11 @@ export default function Skills({ id }) {
           </motion.h3>
           
           <div className="space-y-6 max-w-3xl mx-auto">
-            {[
-              { name: "PHP/Laravel", value: 90 },
-              { name: "MySQL/Database Design", value: 85 },
-              { name: "JavaScript/React", value: 75 },
-              { name: "Linux Server Administration", value: 80 },
-              { name: "HTML/CSS/Responsive Design", value: 85 }
-            ].map((skill, index) => (
+            {resumeData.coreTechnicalProficiencies.map((skill, index) => (
               <div key={index} className="space-y-2">
-                <div className="flex justify-between">
-                  <span className="text-gray-700 dark:text-gray-300">{skill.name}</span>
-                  <span className="text-gray-700 dark:text-gray-300">{skill.value}%</span>
+                <div className="flex flex-col gap-1 text-sm sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:text-base">
+                  <span className="break-words text-gray-700 dark:text-gray-300">{skill.name}</span>
+                  <span className="shrink-0 text-gray-700 dark:text-gray-300">{skill.value}%</span>
                 </div>
                 <motion.div 
                   className="h-2 w-full bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden"

@@ -26,16 +26,23 @@ export default function Education() {
               </div>
               <div>
                 <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Academic Education</h3>
-                <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-6 shadow-md">
-                  <h4 className="text-xl font-bold text-gray-900 dark:text-white">
-                    {resumeData.education.degree}
-                  </h4>
-                  <p className="text-primary-light dark:text-primary-dark mt-1">
-                    {resumeData.education.institution}
-                  </p>
-                  <p className="text-gray-600 dark:text-gray-400 mt-1">
-                    Graduated: {resumeData.education.year}
-                  </p>
+                <div className="space-y-4">
+                  {resumeData.education.map((item, index) => (
+                    <div
+                      key={index}
+                      className="bg-gray-50 dark:bg-gray-800 rounded-lg p-6 shadow-md"
+                    >
+                      <h4 className="text-xl font-bold text-gray-900 dark:text-white">
+                        {item.degree}
+                      </h4>
+                      <p className="text-primary-light dark:text-primary-dark mt-1">
+                        {item.institution}
+                      </p>
+                      <p className="text-gray-600 dark:text-gray-400 mt-1">
+                        Graduated: {item.year}
+                      </p>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>

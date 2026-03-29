@@ -107,7 +107,7 @@ export default function About({ id }) {
               </a>
               
               <a 
-                href="/files/resume.pdf"
+                href={resumeData.personalInfo.links.resume || '/files/resume.pdf'}
                 download="Md_Sumon_Islam_Resume.pdf"
                 className="flex items-center justify-center w-full text-center py-2 px-4 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-800 dark:text-gray-200 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
               >

@@ -2,8 +2,11 @@
 
 import { FiDownload } from 'react-icons/fi';
 import { motion } from 'framer-motion';
+import { resumeData } from '../../data/resumeData';
 
 export default function DownloadResumeButton({ className = '', variant = 'primary', size = 'md' }) {
+  const resumeUrl = resumeData.personalInfo.links.resume || '/files/resume.pdf';
+
   // Determine classes based on variant and size
   const getButtonClasses = () => {
     const baseClasses = "inline-flex items-center justify-center rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50";
@@ -25,7 +28,7 @@ export default function DownloadResumeButton({ className = '', variant = 'primar
 
   return (
     <motion.a
-      href="/files/resume.pdf"
+      href={resumeUrl}
       download="Md_Sumon_Islam_Resume.pdf"
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}

@@ -7,12 +7,11 @@ import Skills from '../components/sections/Skills';
 import Education from '../components/sections/Education';
 import Contact from '../components/sections/ContactNew';
 import Footer from '../components/Footer';
-import SEO from '../components/SEO';
 import ScrollProgress from '../components/ScrollProgress';
+import { resumeData } from '../data/resumeData';
 
 export default function Home() {  return (
     <main>
-      <SEO />
       <ScrollProgress />
       <Navbar />
       <Hero />
@@ -25,7 +24,7 @@ export default function Home() {  return (
       
       {/* For better SEO, add hidden links to important files */}
       <div className="hidden">
-        <a href="/files/resume.pdf" aria-hidden="true">Resume</a>
+        <a href={resumeData.personalInfo.links.resume || '/files/resume.pdf'} aria-hidden="true">Resume</a>
       </div>
     </main>
   );
